@@ -2,6 +2,14 @@
 
 public class Cat : IAnimal
 {
+    public Cat()
+    {
+        Name = "Barsik";
+        OwnerName = "Unknown person";
+        Age = 0;
+        Console.WriteLine($"{nameof(Cat)}: {Name}, Owner: {OwnerName}, Age: {Age}");
+    }
+    
     public Cat(string name, string ownerName, byte age)
     {
         if (age > 30)
@@ -17,14 +25,6 @@ public class Cat : IAnimal
         Name = name;
         OwnerName = ownerName;
         Age = age;
-        Console.WriteLine($"{nameof(Cat)}: {Name}, Owner: {OwnerName}, Age: {Age}");
-    }
-
-    public Cat()
-    {
-        Name = "Barsik";
-        OwnerName = "Unknown person";
-        Age = 0;
         Console.WriteLine($"{nameof(Cat)}: {Name}, Owner: {OwnerName}, Age: {Age}");
     }
 

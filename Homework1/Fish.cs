@@ -2,6 +2,14 @@
 
 public class Fish : IAnimal
 {
+    public Fish()
+    {
+        Name = "Bubbles";
+        OwnerName = "Unknown person";
+        Age = 0;
+        Console.WriteLine($"{nameof(Fish)}: {Name}, Owner: {OwnerName}, Age: {Age}");
+    }
+    
     public Fish(string name, string ownerName, byte age)
     {
         if (age > 30)
@@ -17,14 +25,6 @@ public class Fish : IAnimal
         Name = name;
         OwnerName = ownerName;
         Age = age;
-        Console.WriteLine($"{nameof(Fish)}: {Name}, Owner: {OwnerName}, Age: {Age}");
-    }
-
-    public Fish()
-    {
-        Name = "Bubbles";
-        OwnerName = "Unknown person";
-        Age = 0;
         Console.WriteLine($"{nameof(Fish)}: {Name}, Owner: {OwnerName}, Age: {Age}");
     }
 
