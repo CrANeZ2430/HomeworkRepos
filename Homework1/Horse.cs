@@ -2,6 +2,14 @@
 
 public class Horse : IAnimal
 {
+    public Horse()
+    {
+        Name = "Thunder";
+        OwnerName = "Nobody";
+        Age = 0;
+        Console.WriteLine($"{nameof(Horse)}: {Name}, Owner: {OwnerName}, Age: {Age}");
+    }
+    
     public Horse(string name, string ownerName, byte age)
     {
         if (age > 30)
@@ -17,14 +25,6 @@ public class Horse : IAnimal
         Name = name;
         OwnerName = ownerName;
         Age = age;
-        Console.WriteLine($"{nameof(Horse)}: {Name}, Owner: {OwnerName}, Age: {Age}");
-    }
-
-    public Horse()
-    {
-        Name = "Thunder";
-        OwnerName = "Unknown person";
-        Age = 0;
         Console.WriteLine($"{nameof(Horse)}: {Name}, Owner: {OwnerName}, Age: {Age}");
     }
 

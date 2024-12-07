@@ -2,6 +2,14 @@
 
 public class Parrot : IAnimal
 {
+    public Parrot()
+    {
+        Name = "Keshia";
+        OwnerName = "Unknown person";
+        Age = 0;
+        Console.WriteLine($"{nameof(Parrot)}: {Name}, Owner: {OwnerName}, Age: {Age}");
+    }
+    
     public Parrot(string name, string ownerName, byte age)
     {
         if (age > 30)
@@ -17,14 +25,6 @@ public class Parrot : IAnimal
         Name = name;
         OwnerName = ownerName;
         Age = age;
-        Console.WriteLine($"{nameof(Parrot)}: {Name}, Owner: {OwnerName}, Age: {Age}");
-    }
-
-    public Parrot()
-    {
-        Name = "Keshia";
-        OwnerName = "Unknown person";
-        Age = 0;
         Console.WriteLine($"{nameof(Parrot)}: {Name}, Owner: {OwnerName}, Age: {Age}");
     }
 

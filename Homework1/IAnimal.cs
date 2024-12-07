@@ -4,6 +4,7 @@ public interface IAnimal
 {
     string Name { get; }
     string OwnerName { get; }
+    byte Age { get; }
 
     void SayHello()
     {
