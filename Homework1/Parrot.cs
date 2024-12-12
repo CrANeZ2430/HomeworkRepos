@@ -9,18 +9,14 @@ public class Parrot : IAnimal
         Age = 0;
         Console.WriteLine($"{nameof(Parrot)}: {Name}, Owner: {OwnerName}, Age: {Age}");
     }
-    
+
     public Parrot(string name, string ownerName, byte age)
     {
         if (age > 30)
-        {
             throw new ArgumentException($"{nameof(Parrot)} age must be between 0 and 30");
-        }
 
-        if (name == "" || ownerName == "")
-        {
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(ownerName))
             throw new ArgumentException($"{nameof(Parrot)} or owner name cannot be empty");
-        }
 
         Name = name;
         OwnerName = ownerName;
