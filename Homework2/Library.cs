@@ -9,6 +9,11 @@ public class Library
         _library = library;
     }
 
+    public Library()
+    {
+        _library = new List<Book>();
+    }
+
     public void AddBook(Book book)
     {
         _library.Add(book);
@@ -27,35 +32,39 @@ public class Library
 
     public void TakeBook(Library customLibrary, Book book)
     {
-        DeleteBook(book);
+        if (book.InUsage)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("This book is currently in use");
+            Console.ResetColor();
+            return;
+        }
         customLibrary.AddBook(book);
-    }
-
-    private void DeleteBook(Book book)
-    {
-        _library.Remove(book);
+        book.InUsage = true;
     }
 
     public void ShowAllBooks()
     {
+        if (_library.Count == 0)
+            NoBookError();
         Console.ForegroundColor = ConsoleColor.Blue;
         foreach (var book in _library)
             Console.WriteLine(book.ToString());
         Console.ResetColor();
     }
 
-    public Book FindBookByAuthor(string author)
+    public Book FindBookByTitle(string title)
     {
-        var book = _library.FirstOrDefault(book => book.Author == author);
+        var book = _library.FirstOrDefault(book => book.Title == title);
         if (book is null)
             NoBookError();
 
         return book;
     }
 
-    public Book FindBookByTitle(string title)
+    public Book FindBookByAuthor(string author)
     {
-        var book = _library.FirstOrDefault(book => book.Title == title);
+        var book = _library.FirstOrDefault(book => book.Author == author);
         if (book is null)
             NoBookError();
 
