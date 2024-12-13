@@ -3,6 +3,7 @@
 public class Book
 {
     private string _publisher;
+    private bool _inUsage;
 
     public Book(string title, string author, string publisher)
     {
@@ -30,7 +31,20 @@ public class Book
         }
     }
 
-    public bool InUsage { get; set; }
+    public bool InUsage
+    {
+        get
+        {
+            return _inUsage;
+        }
+        set
+        {
+            if (value == false)
+                throw new ArgumentException("Book is already in use");
+
+            _inUsage = value;
+        }
+    }
 
     public void RenamePublisher(string newPublisher)
     {
