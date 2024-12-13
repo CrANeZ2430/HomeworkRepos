@@ -9,7 +9,12 @@ public class Library
         _library = library;
     }
 
-    public void AddBook(Book book)
+    public Library()
+    {
+        _library = new List<Book>();
+    }
+
+    private void AddBook(Book book)
     {
         _library.Add(book);
         if (book is null)
@@ -20,42 +25,46 @@ public class Library
 
     public void AddBook(string title, string author, string publisher)
     {
-        var book = new Book(title, author, publisher);
+        var book = new Book(title.Trim(), author.Trim(), publisher.Trim());
         _library.Add(book);
         SuccessfulBookAddition();
     }
 
     public void TakeBook(Library customLibrary, Book book)
     {
-        DeleteBook(book);
+        if (book.InUsage)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("This book is currently in use");
+            Console.ResetColor();
+            return;
+        }
         customLibrary.AddBook(book);
-    }
-
-    private void DeleteBook(Book book)
-    {
-        _library.Remove(book);
+        book.InUsage = true;
     }
 
     public void ShowAllBooks()
     {
+        if (_library.Count == 0)
+            NoBookError();
         Console.ForegroundColor = ConsoleColor.Blue;
         foreach (var book in _library)
             Console.WriteLine(book.ToString());
         Console.ResetColor();
     }
 
-    public Book FindBookByAuthor(string author)
+    public Book FindBookByTitle(string title)
     {
-        var book = _library.FirstOrDefault(book => book.Author == author);
+        var book = _library.FirstOrDefault(book => book.Title == title.Trim());
         if (book is null)
             NoBookError();
 
         return book;
     }
 
-    public Book FindBookByTitle(string title)
+    public Book FindBookByAuthor(string author)
     {
-        var book = _library.FirstOrDefault(book => book.Title == title);
+        var book = _library.FirstOrDefault(book => book.Author == author.Trim());
         if (book is null)
             NoBookError();
 
@@ -64,7 +73,7 @@ public class Library
 
     public Book FindBookByPublisher(string publisher)
     {
-        var book = _library.FirstOrDefault(book => book.Publisher == publisher);
+        var book = _library.FirstOrDefault(book => book.Publisher == publisher.Trim());
         if (book is null)
             NoBookError();
 
@@ -73,7 +82,9 @@ public class Library
 
     public Book FindBookByAllMeans(string title, string author, string publisher)
     {
-        var book = _library.FirstOrDefault(book => book.Title == title && book.Author == author && book.Publisher == publisher);
+        var book = _library.FirstOrDefault(book => book.Title == title.Trim() &&
+                                                   book.Author == author.Trim() &&
+                                                   book.Publisher == publisher.Trim());
         if (book is null)
             NoBookError();
 

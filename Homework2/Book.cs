@@ -30,6 +30,8 @@ public class Book
         }
     }
 
+    public bool InUsage { get; set; }
+
     public void RenamePublisher(string newPublisher)
     {
         Publisher = newPublisher;
