@@ -19,7 +19,7 @@ public static class LinqExercises
             return;
         }
 
-        Console.WriteLine($"Words that start with 'a': {string.Join(", ", processedText)}");
+        Console.WriteLine(string.Join(", ", processedText));
     }
 
     public static void CheckForSameNumbers(int[] numbers1, int[] numbers2)
@@ -37,7 +37,7 @@ public static class LinqExercises
             return;
         }
 
-        Console.WriteLine($"Numbers, found in two arrays: {string.Join(", ", processedNumbers)}");
+        Console.WriteLine(string.Join(", ", processedNumbers));
     }
 
     public static void CheckForHighestMark(Student[] students)
@@ -49,7 +49,8 @@ public static class LinqExercises
         }
 
         var processedStudent = students.MaxBy(x => x.Mark);
-        Console.WriteLine($"Students with the highest mark: {processedStudent}");
+
+        Console.WriteLine(processedStudent);
     }
 
     public static void CheckForAverageCategoryPrice(Product[] products)
