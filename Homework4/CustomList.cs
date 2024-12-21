@@ -17,57 +17,35 @@ public sealed class CustomList<T> : IEnumerable<T>
     public CustomList()
     {
         _data = new T[4];
-        Count = 0;
-        Capacity = _data.Length;
+        _count = 0;
+        _capacity = _data.Length;
     }
 
     public CustomList(int listCapacity)
     {
         _data = new T[listCapacity];
-        Count = 0;
-        Capacity = listCapacity;
+        _count = 0;
+        _capacity = listCapacity;
 
     }
     public CustomList(T[] data)
     {
         _data = data;
-        Count = _data.Length;
-        Capacity = _data.Length;
-    }
-
-    public int Count
-    {
-        get => _count;
-        private set
-        {
-            if (value < _count || value > _data.Length)
-                throw new ArgumentException("Cannot reduce count of a custom list or make it bigger than the internal array");
-            _count = value;
-        }
-    }
-
-    public int Capacity
-    {
-        get => _capacity;
-        private set
-        {
-            if (value < _capacity)
-                throw new ArgumentException("Cannot reduce capacity of a custom list or make it bigger than the internal array");
-            _capacity = value;
-        }
+        _count = _data.Length;
+        _capacity = _data.Length;
     }
 
     public T this[int index]
     {
         get
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index >= _count)
                 throw new ArgumentOutOfRangeException(nameof(index));
             return _data[index];
         }
         set
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index >= _count)
                 throw new ArgumentOutOfRangeException(nameof(index));
             _data[index] = value;
         }
@@ -75,7 +53,7 @@ public sealed class CustomList<T> : IEnumerable<T>
 
     public IEnumerator<T> GetEnumerator()
     {
-        for (var i = 0; i < Count; i++)
+        for (var i = 0; i < _count; i++)
             yield return _data[i];
     }
 
@@ -86,22 +64,22 @@ public sealed class CustomList<T> : IEnumerable<T>
 
     public void Add(T element)
     {
-        if (Capacity == Count)
+        if (_capacity == _count)
         {
-            if (Capacity < 4)
-                Capacity = 4;
+            if (_capacity < 4)
+                _capacity = 4;
             else
-                Capacity *= 2;
+                _capacity *= 2;
 
             var lastData = _data;
-            _data = new T[Capacity];
+            _data = new T[_capacity];
 
             Array.Copy(lastData, _data, lastData.Length);
 
             OnExpandedEvent?.Invoke();
         }
 
-        _data[Count] = element;
-        Count++;
+        _data[_count] = element;
+        _count++;
     }
 }
