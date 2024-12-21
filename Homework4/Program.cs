@@ -13,15 +13,12 @@ customList.Add(new User(368284, "Mike", new DateTime(1954, 4, 21)));
 customList.Add(new User(672515, "Jimmy", new DateTime(1967, 5, 30)));
 
 //random linq method
-var userWithSpecialId = customList.FirstOrDefault(x => x.Id == 672515).Name;
-Console.WriteLine(userWithSpecialId);
+Console.WriteLine(customList.FirstOrDefault(x => x.Id == 672515)?.Name);
 Console.WriteLine();
 
 //filtration
-var usersOlderThanSixty = customList.Where(x => (DateTime.Now - x.Birthday).TotalDays / 365 > 40).Select(x => x.Name);
-Console.WriteLine(string.Join(", ", usersOlderThanSixty));
+Console.WriteLine(string.Join(", ", customList.Where(x => (DateTime.Now - x.Birthday).TotalDays / 365 > 40).Select(x => x.Name)));
 Console.WriteLine();
 
 //sorting
-var listToDisplay = customList.OrderBy(x => x.Id).Select(x => x.Name);
-Console.WriteLine(string.Join(", ", listToDisplay));
+Console.WriteLine(string.Join(", ", customList.OrderBy(x => x.Id).Select(x => x.Name)));
