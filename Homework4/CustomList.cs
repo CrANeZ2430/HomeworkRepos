@@ -7,13 +7,6 @@ public sealed class CustomList<T> : IEnumerable<T>
     private int _count;
     private int _capacity;
 
-    private event Action OnExpandedEvent = () =>
-    {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("List has just expanded");
-        Console.ResetColor();
-    };
-
     public CustomList()
     {
         _data = new T[4];
@@ -34,6 +27,13 @@ public sealed class CustomList<T> : IEnumerable<T>
         _count = _data.Length;
         _capacity = _data.Length;
     }
+
+    private event Action OnExpandedEvent = () =>
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("List has just expanded");
+        Console.ResetColor();
+    };
 
     public T this[int index]
     {

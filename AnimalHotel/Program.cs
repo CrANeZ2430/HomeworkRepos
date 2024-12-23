@@ -1,6 +1,4 @@
-﻿// create abstract factory to create animals
-
-using AnimalHotel;
+﻿using AnimalHotel;
 using AnimalHotel.Animals;
 using AnimalHotel.Hotel;
 
@@ -32,9 +30,3 @@ for (var i = 0; i < 10; i++)
     romashkaHotel.AddAnimal(animal);
     kyivHotel.AddAnimal(animal);
 }
-
-foreach (var animal in genericHotel) Console.WriteLine(animal.Name);
-
-foreach (var animal in romashkaHotel) Console.WriteLine((animal as IAnimal).Name);
-
-foreach (var animal in kyivHotel) Console.WriteLine(animal.Name);
