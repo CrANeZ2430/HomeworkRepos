@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using AnimalHotel.Animals;
 
 namespace AnimalHotel.Hotel;
@@ -6,9 +6,7 @@ namespace AnimalHotel.Hotel;
 public class GenericHotel<T> : IEnumerable<T> where T : IAnimal
 {
     private int _count = 0;
-
     private int _capacity = 4;
-
     private T[] _animals = new T[4];
 
     public void FeedAnimals()
@@ -45,7 +43,7 @@ public class GenericHotel<T> : IEnumerable<T> where T : IAnimal
 
     public IEnumerator<T> GetEnumerator()
     {
-        for(var i = 0; i < _count; i++) yield return _animals[i];
+        for (var i = 0; i < _count; i++) yield return _animals[i];
     }
 
     IEnumerator IEnumerable.GetEnumerator()

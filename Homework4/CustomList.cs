@@ -23,6 +23,9 @@ public sealed class CustomList<T> : IEnumerable<T>
     }
     public CustomList(T[] data)
     {
+        if (data.Length == 0)
+            throw new ArgumentNullException("data");
+
         _data = data;
         _count = _data.Length;
         _capacity = _data.Length;
@@ -66,11 +69,7 @@ public sealed class CustomList<T> : IEnumerable<T>
     {
         if (_capacity == _count)
         {
-            if (_capacity < 4)
-                _capacity = 4;
-            else
-                _capacity *= 2;
-
+            _capacity *= 2;
             var lastData = _data;
             _data = new T[_capacity];
 

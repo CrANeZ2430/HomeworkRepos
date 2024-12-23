@@ -1,21 +1,25 @@
-namespace AnimalHotel.Animals;
+﻿namespace AnimalHotel.Animals;
 
-public class Cat : IAnimal, IComparable<Cat>
+public class Cat : IAnimal
 {
-    private Cat(string name, Owner owner)
+    private Cat(string name, byte age, AnimalColor color, Owner owner)
     {
         Name = name;
+        Age = age;
+        Color = color;
         Owner = owner;
     }
+
     public string Name { get; set; }
-    
+    public byte Age { get; set; }
+    public AnimalColor Color { get; set; }
     public Owner Owner { get; private set; }
-    
+
     public void Meow()
     {
         Console.WriteLine($"{nameof(Cat)} is meowing");
     }
-    
+
     public void Eat()
     {
         Console.WriteLine($"{nameof(Cat)} is eating");
@@ -25,16 +29,9 @@ public class Cat : IAnimal, IComparable<Cat>
     {
         Console.WriteLine($"{nameof(Cat)} is sleeping");
     }
-    
-    public static Cat CreateCat(string name, Owner owner)
-    {
-        return new Cat(name, owner);
-    }
 
-    public int CompareTo(Cat? other)
+    public static Cat CreateCat(string name, byte age, AnimalColor color, Owner owner)
     {
-        if (ReferenceEquals(this, other)) return 0;
-        if (other is null) return 1;
-        return string.Compare(Name, other.Name, StringComparison.Ordinal);
+        return new Cat(name, age, color, owner);
     }
 }
