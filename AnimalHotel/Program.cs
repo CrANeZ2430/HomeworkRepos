@@ -39,7 +39,7 @@ Console.WriteLine("********************");
 string ownerName;
 while (true)
 {
-    Console.Write("Enter owner name: ");
+    Console.Write("Enter an owner name: ");
     ownerName = Console.ReadLine()!;
     if (ownerName != null)
         break;
