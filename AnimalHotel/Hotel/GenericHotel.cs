@@ -11,12 +11,14 @@ public class GenericHotel<T> : IEnumerable<T> where T : IAnimal
 
     public void FeedAnimals()
     {
-        foreach (var animal in _animals) animal.Eat();
+        for (var i = 0; i < _count; i++)
+            _animals[i].Eat();
     }
 
     public void PutAnimalsToSleep()
     {
-        foreach (var animal in _animals) animal.Sleep();
+        for (var i = 0; i < _count; i++)
+            _animals[i].Sleep();
     }
 
     public void AddAnimal(T animal)
@@ -26,13 +28,26 @@ public class GenericHotel<T> : IEnumerable<T> where T : IAnimal
             _capacity *= 2;
             Array.Resize(ref _animals, _capacity);
         }
-
         _animals[_count++] = animal;
+    }
+
+    public void SortAnimals()
+    {
+        if (_count >= 2)
+            Array.Sort(_animals, 0, _count);
+    }
+
+    public IEnumerable<T> FindAnimalsByOwnerName(string ownerName)
+    {
+        return _animals.Where(x => x != null && x.Owner.Name == ownerName);
     }
 
     public void PrintAnimals()
     {
-        foreach (var animal in _animals) Console.WriteLine(animal.Name);
+        Console.WriteLine("Generic Hotel members:");
+        for (var i = 0; i < _count; ++i)
+            Console.Write($"{_animals[i]} ");
+        Console.WriteLine();
     }
 
     public T this[int index]

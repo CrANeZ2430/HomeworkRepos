@@ -29,6 +29,19 @@ public class Dog : IAnimal
     {
         Console.WriteLine($"{nameof(Dog)} is sleeping");
     }
+    public int CompareTo(IAnimal? other)
+    {
+        if (Age > other.Age)
+            return 1;
+        if (Age < other.Age)
+            return -1;
+        return 0;
+    }
+
+    public override string ToString()
+    {
+        return $"Dog {Name}";
+    }
 
     public static Dog CreateDog(string name, byte age, AnimalColor color, Owner owner)
     {
