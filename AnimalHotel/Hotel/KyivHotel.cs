@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using AnimalHotel.Animals;
 
 namespace AnimalHotel.Hotel;
@@ -11,12 +11,14 @@ public class KyivHotel : IEnumerable<IAnimal>
 
     public void FeedAnimals()
     {
-        foreach (var animal in _animals) animal.Eat();
+        for (var i = 0; i < _count; i++)
+            _animals[i].Eat();
     }
 
     public void PutAnimalsToSleep()
     {
-        foreach (var animal in _animals) animal.Sleep();
+        for (var i = 0; i < _count; i++)
+            _animals[i].Sleep();
     }
 
     public void AddAnimal(IAnimal animal)
@@ -30,9 +32,23 @@ public class KyivHotel : IEnumerable<IAnimal>
         _animals[_count++] = animal;
     }
 
+    public void SortAnimals()
+    {
+        if (_count >= 2)
+            Array.Sort(_animals, 0, _count);
+    }
+
+    public IEnumerable<IAnimal> FindAnimalsByOwnerName(string ownerName)
+    {
+        return _animals.Where(x => x != null && x.Owner.Name == ownerName);
+    }
+
     public void PrintAnimals()
     {
-        foreach (var animal in _animals) Console.WriteLine(animal.Name);
+        Console.WriteLine("Kyiv Hotel members:");
+        for (var i = 0; i < _count; ++i)
+            Console.Write($"{_animals[i]} ");
+        Console.WriteLine();
     }
 
     public IAnimal this[int index]
@@ -41,7 +57,6 @@ public class KyivHotel : IEnumerable<IAnimal>
         set => _animals[index] = value;
     }
 
-    // throws error if count > capacity as it has null values
     public IEnumerator<IAnimal> GetEnumerator()
     {
         for (var i = 0; i < _count; i++) yield return _animals[i];
