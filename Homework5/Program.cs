@@ -13,9 +13,9 @@ while (true)
         break;
 }
 
-var deciamlNumber = ConvertBinaryToDecimal(binaryNumberToEnter);
-Console.WriteLine($"Your decimal number: {deciamlNumber}");
-Console.WriteLine($"Ability to divide by 2: {regexForDivisionByTwo.IsMatch(deciamlNumber.ToString())}");
+var decimalNumber = ConvertBinaryToDecimal(binaryNumberToEnter);
+Console.WriteLine($"Your decimal number: {decimalNumber}");
+Console.WriteLine($"Ability to divide by 2: {regexForDivisionByTwo.IsMatch(decimalNumber.ToString())}");
 
 int ConvertBinaryToDecimal(int binaryNumber)
 {
