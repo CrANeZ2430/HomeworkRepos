@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-var regexForBinary = new Regex("[0,1]$");
+var regexForBinary = new Regex("^[0,1]*$");
 var regexForDivisionByTwo = new Regex("[0,2,4,6,8]$");
 
 int binaryNumberToEnter;
