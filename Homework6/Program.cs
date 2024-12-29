@@ -7,7 +7,7 @@ while (true)
 {
     pr.PushData();
     cn.ProcessData();
-    Console.WriteLine("Process more data or exit");
+    Console.WriteLine("Process more data or exit?");
     var str = Console.ReadLine();
     if (str == "exit")
         break;
