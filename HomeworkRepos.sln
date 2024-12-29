@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalHotel", "AnimalHotel\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework5", "Homework5\Homework5.csproj", "{20EE8EFC-CFE1-4D24-8641-8158D1CCE105}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework6", "Homework6\Homework6.csproj", "{65871DC0-C102-4C83-B203-D96248A0A425}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{20EE8EFC-CFE1-4D24-8641-8158D1CCE105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20EE8EFC-CFE1-4D24-8641-8158D1CCE105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20EE8EFC-CFE1-4D24-8641-8158D1CCE105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65871DC0-C102-4C83-B203-D96248A0A425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65871DC0-C102-4C83-B203-D96248A0A425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65871DC0-C102-4C83-B203-D96248A0A425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65871DC0-C102-4C83-B203-D96248A0A425}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
