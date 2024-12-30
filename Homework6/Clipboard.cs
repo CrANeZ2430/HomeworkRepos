@@ -3,7 +3,7 @@
 public static class Clipboard
 {
     private static readonly Queue<string> s_clipboard = new();
-    public static object LockerObject { get; } = new();
+    private static object LockerObject { get; } = new();
 
     public static void Push(string data)
     {

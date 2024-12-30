@@ -18,7 +18,6 @@ public class Producer
 
     public void PushData()
     {
-        lock (Clipboard.LockerObject)
-            Clipboard.Push(GenerateData());
+        Clipboard.Push(GenerateData());
     }
 }
