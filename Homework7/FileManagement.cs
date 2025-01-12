@@ -5,8 +5,11 @@ public static class FileManagement
     public static void FileManagementSync(int loopNumber)
     {
         var path = @"C:\Temp\number.txt";
-        File.Create(path).Close();
-        File.AppendAllText(path, loopNumber.ToString());
+        using var fileStream = new FileStream(path, FileMode.OpenOrCreate)
+        {
+            File.Create(path).Close();
+            File.AppendAllText(path, loopNumber.ToString());
+        };
         File.Delete(path);
     }
 
@@ -15,8 +18,11 @@ public static class FileManagement
         await Task.Run(() =>
         {
             var path = @"C:\Temp\number.txt";
+            using var fileStream = new FileStream(path, FileMode.OpenOrCreate)
+            {
             File.Create(path).Close();
             File.AppendAllText(path, loopNumber.ToString());
+            };
             File.Delete(path);
         });
     }
