@@ -12,6 +12,7 @@ for (var i = 0; i < 100; i++)
 }
 sw.Stop();
 Console.WriteLine($"Sync: {sw.ElapsedMilliseconds} ms");
+sw.Reset();
 
 // async method
 sw.Restart();
