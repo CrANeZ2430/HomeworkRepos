@@ -16,10 +16,12 @@ else
 
 while (true)
 {
-    await SharedData.IoSemaphore.WaitAsync();
+    SharedData.IOMutex.WaitOne();
+
     File.AppendAllText(path, $"{Random.Shared.Next(1, 10000)}\n");
-    await Task.Delay(100);
-    SharedData.IoSemaphore.Release();
+    await Task.Delay(10);
+
+    SharedData.IOMutex.Release();
 
     if (sw.ElapsedMilliseconds > 10000)
         break;
