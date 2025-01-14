@@ -1,10 +1,9 @@
-﻿using System.Diagnostics;
+﻿using Homework8._1;
 
-var ioSemaphore = new SemaphoreSlim(1, 1);
-var sw = new Stopwatch();
+var sw = SharedData.Stopwatch;
 sw.Start();
 
-var path = @"C:\Temp\numbers.txt";
+var path = SharedData.Path;
 if (File.Exists(path))
 {
     File.Delete(path);
@@ -17,10 +16,11 @@ else
 
 while (true)
 {
-    await ioSemaphore.WaitAsync();
+    await SharedData.IoSemaphore.WaitAsync();
     File.AppendAllText(path, $"{Random.Shared.Next(1, 10000)}\n");
     await Task.Delay(100);
-    ioSemaphore.Release();
+    SharedData.IoSemaphore.Release();
+
     if (sw.ElapsedMilliseconds > 10000)
         break;
 }
