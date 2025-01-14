@@ -6,14 +6,14 @@ sw.Start();
 var path = SharedData.Path;
 while (true)
 {
-    SharedData.IOMutex.WaitOne();
+    SharedData.IOSemaphore.WaitOne();
 
     var fileNumbers = File.ReadAllLines(path);
     var average = await AverageAsync(fileNumbers);
     Console.WriteLine($"Average: {average}");
     await Task.Delay(10);
 
-    SharedData.IOMutex.Release();
+    SharedData.IOSemaphore.Release();
 
     if (sw.ElapsedMilliseconds > 10000)
         break;
