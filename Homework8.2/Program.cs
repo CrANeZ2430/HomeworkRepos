@@ -4,7 +4,7 @@ var sw = SharedData.Stopwatch;
 sw.Start();
 
 var path = SharedData.Path;
-var shouldStop = false;
+var canStop = false;
 while (true)
 {
     await Task.Run(async () =>
@@ -12,9 +12,9 @@ while (true)
         SharedData.IoSemaphore.WaitOne();
 
         var fileNumbers = File.ReadAllLines(path);
-        if (fileNumbers.Any(x => x == "Done")) shouldStop = true;
+        if (fileNumbers.Any(x => x == "Done")) canStop = true;
 
-        if (shouldStop)
+        if (canStop)
         {
             SharedData.IoSemaphore.Release();
             Console.ForegroundColor = ConsoleColor.Green;

@@ -10,9 +10,12 @@ if (File.Exists(path))
     File.Create(path).Close();
 }
 else
+{
     File.Create(path).Close();
+}
 
-while (true)
+var canStop = false;
+while (!canStop)
 {
     await Task.Run(async () =>
     {
@@ -21,12 +24,11 @@ while (true)
         File.AppendAllText(path, $"{new Random().Next(1, 101)}{Environment.NewLine}");
         await Task.Delay(SharedData.Delay);
 
+        if (sw.ElapsedMilliseconds > SharedData.WorkTime)
+        {
+            File.AppendAllText(path, "Done");
+            canStop = true;
+        }
         SharedData.IoSemaphore.Release();
     });
-
-    if (sw.ElapsedMilliseconds > SharedData.WorkTime)
-    {
-        File.AppendAllText(path, "Done");
-        break;
-    }
 }
