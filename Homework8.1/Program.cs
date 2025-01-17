@@ -16,13 +16,16 @@ else
 
 while (true)
 {
-    SharedData.IOSemaphore.WaitOne();
+    await Task.Run(async () =>
+    {
+        SharedData.IoSemaphore.WaitOne();
 
-    File.AppendAllText(path, $"{new Random().Next(1, 10000)}{Environment.NewLine}");
-    await Task.Delay(10);
+        File.AppendAllText(path, $"{new Random().Next(1, 101)}{Environment.NewLine}");
+        await Task.Delay(SharedData.Delay);
 
-    SharedData.IOSemaphore.Release();
+        SharedData.IoSemaphore.Release();
+    });
 
-    if (sw.ElapsedMilliseconds > 10000)
+    if (sw.ElapsedMilliseconds > SharedData.WorkTime)
         break;
 }
