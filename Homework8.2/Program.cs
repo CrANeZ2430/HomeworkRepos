@@ -1,9 +1,12 @@
 ﻿using Homework8._1;
 
+var cts = new CancellationTokenSource();
+var token = cts.Token;
 var sw = SharedData.Stopwatch;
 sw.Start();
 
 var path = SharedData.Path;
+var shouldStop = false;
 while (true)
 {
     await Task.Run(async () =>
@@ -11,27 +14,36 @@ while (true)
         SharedData.IoSemaphore.WaitOne();
 
         var fileNumbers = File.ReadAllLines(path);
-        var numbers = fileNumbers.Select(double.Parse);
-        var average = AverageAsync(numbers);
-        var deviation = StandardDeviationAsync(numbers);
-        var mode = ModeAsync(numbers);
-        var median = MedianAsync(numbers);
+        if (fileNumbers.Any(x => x == "Done"))
+        {
+            shouldStop = true;
+        }
 
-        var taskArray = new Task<double>[] { average, deviation, mode, median };
-        var results = await Task.WhenAll(taskArray);
-        Console.WriteLine($"Average: {results[0]}; Standard deviation {results[1]}; Mode {results[2]}; Median {results[3]}");
-        await Task.Delay(SharedData.Delay);
+        if (shouldStop)
+        {
+            SharedData.IoSemaphore.Release();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Done");
+            Console.ReadLine();
+            return;
+        }
+        else
+        {
+            var numbers = fileNumbers.Select(double.Parse);
+            var average = AverageAsync(numbers);
+            var deviation = StandardDeviationAsync(numbers);
+            var mode = ModeAsync(numbers);
+            var median = MedianAsync(numbers);
 
-        SharedData.IoSemaphore.Release();
+            var taskArray = new Task<double>[] { average, deviation, mode, median };
+            var results = await Task.WhenAll(taskArray);
+            Console.WriteLine($"Average: {results[0]}; Standard deviation {results[1]}; Mode {results[2]}; Median {results[3]}");
+            await Task.Delay(SharedData.Delay);
+
+            SharedData.IoSemaphore.Release();
+        }
     });
-
-    if (sw.ElapsedMilliseconds > SharedData.WorkTime)
-        break;
 }
-
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("Done");
-Console.ReadLine();
 
 static async Task<double> AverageAsync(IEnumerable<double> numbers)
 {

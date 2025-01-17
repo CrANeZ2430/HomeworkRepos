@@ -27,5 +27,8 @@ while (true)
     });
 
     if (sw.ElapsedMilliseconds > SharedData.WorkTime)
+    {
+        File.AppendAllText(path, "Done");
         break;
+    }
 }
