@@ -1,7 +1,5 @@
 ﻿using Homework8._1;
 
-var cts = new CancellationTokenSource();
-var token = cts.Token;
 var sw = SharedData.Stopwatch;
 sw.Start();
 
@@ -14,10 +12,7 @@ while (true)
         SharedData.IoSemaphore.WaitOne();
 
         var fileNumbers = File.ReadAllLines(path);
-        if (fileNumbers.Any(x => x == "Done"))
-        {
-            shouldStop = true;
-        }
+        if (fileNumbers.Any(x => x == "Done")) shouldStop = true;
 
         if (shouldStop)
         {

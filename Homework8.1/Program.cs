@@ -10,9 +10,7 @@ if (File.Exists(path))
     File.Create(path).Close();
 }
 else
-{
     File.Create(path).Close();
-}
 
 while (true)
 {
